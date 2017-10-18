@@ -15,8 +15,8 @@ A sprite class that recieves component images when constructed. A sprite can dra
 
 ## TODO: 
 
-* Images should be loaded into several lists of components
-* Random image from each component list should be passed to the sprite constructor
+* ~~Images should be loaded into several lists of components~~ - Done
+* ~~Random image from each component list should be passed to the sprite constructor~~ - Done
 * Sprite should be saved with a unique file name each time
       
 

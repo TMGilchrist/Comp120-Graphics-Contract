@@ -1,29 +1,36 @@
 import pygame
 
-# Init display
+# Init display - only necessary when displaying in window
 mainScreen = pygame.display.set_mode((800, 600))
 
+spriteBase = pygame.Surface((800, 600))
+
 # Load images to combine
-pyImage1 = pygame.image.load('redSquareSprite.png')
-pyImage2 = pygame.image.load('smallBlue.png')
+pyImage1 = pygame.image.load('spritePlaceHolder1.jpeg')
+pyImage2 = pygame.image.load('spritePlaceHolder2.jpeg')
 
 
 '''
 Add images to lists based on catgory (head, body, weapon, etc)
 '''
 
+'''
+Choose one image from each list at random
+'''
+
+#Draw sprite components to the spriteBase surface to combine them into one
+spriteBase.blit(pyImage1, (0, 0))
+spriteBase.blit(pyImage2, (50, 0))
 
 
+#Save sprite
+pygame.image.save(spriteBase, 'sprite.jpg')
 
-# Clone base image then merge secondary image onto it
-merged = pyImage1.copy()
-merged.blit(pyImage2, (0, 0))
 
-pygame.image.save(merged, 'mergedShape.jpg')
-
+#Below code is only for displaying the changes in a pygame window. Unncessecary for program
 
 # Update display
-mainScreen.blit(merged, (0,0))
+mainScreen.blit(spriteBase, (0,0))
 pygame.display.flip()
 
 
@@ -38,3 +45,5 @@ while not done:
 
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
             done = True
+
+

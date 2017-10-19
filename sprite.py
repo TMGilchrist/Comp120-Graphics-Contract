@@ -27,7 +27,7 @@ class sprite:
 
         # Save sprite
         #pygame.image.save(spriteBase, 'NewSprites/sprite.' + fileType)
-        self.saveWithID(spriteBase, fileType)
+        self.saveWithID(spriteBase, "D:\Uni\Programming\HereBeDragons\Assets\Sprites\CustomSprites", fileType)
 
 
 # Draw component images onto a base surface then save the surface as a single sprite
@@ -46,7 +46,7 @@ class sprite:
 
 
 # Save sprite with incrementing filename based on a .txt file of existing names
-    def saveWithID(self, toSave, fileType):
+    def saveWithID(self, toSave, savePath, fileType):
 
         spriteID = 0
 
@@ -57,4 +57,4 @@ class sprite:
             f.write("sprite" + str(spriteID) + "\n")
             f.close()
 
-        pygame.image.save(toSave, "NewSprites/sprite" + str(spriteID) + "." + fileType)
+        pygame.image.save(toSave, savePath + "/sprite" + str(spriteID) + "." + fileType)

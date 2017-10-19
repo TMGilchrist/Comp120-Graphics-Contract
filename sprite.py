@@ -16,7 +16,7 @@ class sprite:
 
 
     # Draw component images onto a base surface then save the surface as a single sprite
-    def draw(self, fileType):
+    def draw(self):
         spriteBase = pygame.Surface(self.size, pygame.SRCALPHA, 32)
         spriteBase.set_alpha(255)
 
@@ -26,8 +26,11 @@ class sprite:
         spriteBase.blit(self.head, (0, 0))
 
         # Save sprite
-        #pygame.image.save(spriteBase, 'NewSprites/sprite.' + fileType)
-        self.saveWithID(spriteBase, "D:\Uni\Programming\HereBeDragons\Assets\Sprites\CustomSprites", fileType)
+        #self.saveWithID(spriteBase, "D:\Uni\Programming\HereBeDragons\Assets\Sprites\CustomSprites", fileType)
+        #self.saveWithID(spriteBase, "//tremictssan.fal.ac.uk\userdata\TG190896\My Documents\Py2.7\HereBeDragons\Assets\Sprites\CustomSprites", fileType)
+
+        return spriteBase
+
 
 
 # Draw component images onto a base surface then save the surface as a single sprite

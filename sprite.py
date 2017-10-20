@@ -3,6 +3,8 @@ import pygame
 
 class sprite:
 
+    image = 0
+
     # Initialise new sprite with component images
     def __init__(self, size, base, legs, body, head, feet, weapon):
         self.size = size
@@ -12,7 +14,6 @@ class sprite:
         self.head = head
         self.feet = feet
         self.weapon = weapon
-
 
 
     # Draw component images onto a base surface then save the surface as a single sprite
@@ -26,14 +27,11 @@ class sprite:
         spriteBase.blit(self.head, (0, 0))
 
         # Save sprite
-        #self.saveWithID(spriteBase, "D:\Uni\Programming\HereBeDragons\Assets\Sprites\CustomSprites", fileType)
-        #self.saveWithID(spriteBase, "//tremictssan.fal.ac.uk\userdata\TG190896\My Documents\Py2.7\HereBeDragons\Assets\Sprites\CustomSprites", fileType)
-
-        return spriteBase
+        self.image = spriteBase
 
 
 
-# Draw component images onto a base surface then save the surface as a single sprite
+    # Draw component images onto a base surface then save the surface as a single sprite
     def drawWithPosition(self, basePos, bodyPos, legsPos, headPos, fileType):
         spriteBase = pygame.Surface(self.size, pygame.SRCALPHA, 32)
         spriteBase.set_alpha(255)
@@ -44,12 +42,20 @@ class sprite:
         spriteBase.blit(self.head, headPos)
 
         # Save sprite
-        pygame.image.save(spriteBase, 'NewSprites/sprite.' + fileType)
+        self.image = spriteBase
+
+
+    # Takes a list of properties to update and a list of values corresponding to each property
+    def update(self, toUpdate, newValues):
+        for i in range (0, len(toUpdate)):
+            setattr(self, toUpdate[i], pygame.image.load(newValues[i]))
+
+        self.draw()
 
 
 
-# Save sprite with incrementing filename based on a .txt file of existing names
-    def saveWithID(self, toSave, savePath, fileType):
+    # Save sprite with incrementing filename based on a .txt file of existing names
+    def saveWithID(self, savePath, fileType):
 
         spriteID = 0
 
@@ -60,4 +66,4 @@ class sprite:
             f.write("sprite" + str(spriteID) + "\n")
             f.close()
 
-        pygame.image.save(toSave, savePath + "/sprite" + str(spriteID) + "." + fileType)
+        pygame.image.save(self.image, savePath + "/sprite" + str(spriteID) + "." + fileType)

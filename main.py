@@ -44,5 +44,5 @@ print("added sprites")
 newSprite = sprite((16, 16), random.choice(base), random.choice(legs), random.choice(body), random.choice(head), 0, 0)
 
 # Arguments: bodyPos, headPos, fileType
-image = newSprite.draw()
-newSprite.saveWithID(image, pathToAssets + "\Sprites\CustomSprites", "png")
+newSprite.draw()
+newSprite.saveWithID(pathToAssets + "\Sprites\CustomSprites", "png")

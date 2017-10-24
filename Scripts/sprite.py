@@ -3,7 +3,9 @@ import pygame
 
 class sprite:
 
+    #sprite_base = 0
     image = 0
+
 
     # Initialise new sprite with component images
     def __init__(self, size, base, legs, body, head, feet, weapon):
@@ -15,36 +17,39 @@ class sprite:
         self.feet = feet
         self.weapon = weapon
 
+        self.sprite_base = pygame.Surface(self.size, pygame.SRCALPHA, 32)
+        self.sprite_base.set_alpha(255)
+
 
     # Draw component images onto a base surface then save the surface as a single sprite
     def draw(self):
-        sprite_base = pygame.Surface(self.size, pygame.SRCALPHA, 32)
-        sprite_base.set_alpha(255)
 
-        sprite_base.blit(self.base, (0, 0))
-        sprite_base.blit(self.legs, (0, 0))
-        sprite_base.blit(self.body, (0, 0))
-        sprite_base.blit(self.head, (0, 0))
-        sprite_base.blit(self.feet, (0, 0))
+        # clear surface
+        # self.sprite_base.fill((0,0,0))
+        # self.sprite_base.set_alpha(255)
+
+        self.sprite_base.blit(self.base, (0, 0))
+        self.sprite_base.blit(self.legs, (0, 0))
+        self.sprite_base.blit(self.body, (0, 0))
+        self.sprite_base.blit(self.head, (0, 0))
+        self.sprite_base.blit(self.feet, (0, 0))
 
         # Save sprite
-        self.image = sprite_base
+        self.image = self.sprite_base
 
 
 
     # Draw component images onto a base surface then save the surface as a single sprite
     def draw_with_position(self, base_pos, body_pos, legs_pos, head_pos):
-        sprite_base = pygame.Surface(self.size, pygame.SRCALPHA, 32)
-        sprite_base.set_alpha(255)
 
-        sprite_base.blit(self.base, base_pos)
-        sprite_base.blit(self.legs, legs_pos)
-        sprite_base.blit(self.body, body_pos)
-        sprite_base.blit(self.head, head_pos)
-        sprite_base.blit(self.feet, (0, 0))
+        self.sprite_base.blit(self.base, base_pos)
+        self.sprite_base.blit(self.legs, legs_pos)
+        self.sprite_base.blit(self.body, body_pos)
+        self.sprite_base.blit(self.head, head_pos)
+        self.sprite_base.blit(self.feet, (0, 0))
 
         # Save sprite
-        self.image = sprite_base
+        self.image = self.sprite_base
 
 
     # Takes a list of properties (string) to update and a list of values (images) corresponding to each property

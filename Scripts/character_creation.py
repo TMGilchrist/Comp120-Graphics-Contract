@@ -5,11 +5,10 @@ import glob
 
 class CharacterCreation:
 
-    pathToAssets = "D:/Uni/Programming/HereBeDragons/Assets"
-    # pathToAssets = "//tremictssan.fal.ac.uk\userdata\TG190896\My Documents\Py2.7\HereBeDragons\Assets"
+    path_to_assets = "../Assets"
 
-    blank_component = pygame.image.load(pathToAssets + "/Sprites/blankComponent.png")
-    blank_base = pygame.image.load(pathToAssets + "/Sprites/base/base1.png")
+    blank_component = pygame.image.load(path_to_assets + "/Sprites/blankComponent.png")
+    blank_base = pygame.image.load(path_to_assets + "/Sprites/base/base1.png")
 
     main_screen = 0
     char_screen = 0
@@ -57,17 +56,17 @@ class CharacterCreation:
 
     def update_screen(self):
         # Update Screen
-        self.bigger_char_image = pygame.transform.scale(self.player_char.image, (64, 64))
-        self.char_screen.blit(self.bigger_char_image, (400, 300))
+        # self.bigger_char_image = pygame.transform.scale(self.player_char.image, (64, 64))
+        self.char_screen.blit(self.player_char.image, (400, 300))
         self.main_screen.blit(self.char_screen, (0, 0))
-        pygame.display.flip()
+        pygame.display.update()
 
         print("Screen updated")
 
     # Method returns a sprite base
     def load_blank_sprite(self):
         # Create and draw a new sprite with a base image and blank components
-        blank_sprite = sprite((16, 16), self.blank_base, self.blank_component, self.blank_component, self.blank_component, self.blank_component, 0)
+        blank_sprite = sprite((64, 64), pygame.transform.scale(self.blank_base, (64, 64)), self.blank_component, self.blank_component, self.blank_component, self.blank_component, 0)
         blank_sprite.draw()
 
         return blank_sprite
@@ -80,7 +79,10 @@ class CharacterCreation:
         fake_button = 1
         index = -1
 
-        while fake_button != 2:
+        while True:
+            for event in pygame.event.get():
+                pass  # clear the event loop by doing nothing
+
             fake_button = int(raw_input("Input 1 for scroll forwards, -1 for scroll back"))
 
             if fake_button == 1:
@@ -95,7 +97,7 @@ class CharacterCreation:
             print("index = " + str(index))
             print("Updating sprite")
 
-            self.player_char.update([component], [getattr(self, component + "Choices")[index]])
+            self.player_char.update([component], [getattr(self, component + "_choices")[index]])
             self.update_screen()
 
 
@@ -103,8 +105,9 @@ class CharacterCreation:
 # Calling as test
 bodies = []
 
-for filename in glob.glob("D:/Uni/Programming/HereBeDragons/Assets/Sprites/body/*.png"):
-    bodies.append(pygame.image.load(filename))
+for filename in glob.glob("../Assets/Sprites/body/*.png"):
+    bodies.append(pygame.transform.scale(pygame.image.load(filename), (64, 64)))
+    # pygame.transform.scale(bodies[filename], (64, 64))
 
 test_window = CharacterCreation((800, 600), 0, bodies)
 test_window.draw_win()
